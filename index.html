@@ -1,0 +1,116 @@
+<!-- (c) Copyright 2013 GRAVVITY -->
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>WordFlow</title>
+	<!-- Style Sheets First -->
+	<link rel="stylesheet" type="text/css" href="frameworks/qtip.min.css" />
+	<link rel="stylesheet" type="text/css" href="includes/style.css" />
+	<!-- JS -->
+	<script type="text/javascript" src="frameworks/jquery.min.js" ></script>
+	<script type="text/javascript" src="frameworks/qtip.min.js" ></script>
+	<script type="text/javascript" src="frameworks/mousetrap.min.js"></script>
+</head>
+
+<body>
+
+<!-- editor -->
+<div align="center">
+	<div class="floating-top"></div>
+	<textarea placeholder="Start typing..." id="text" class="mousetrap"></textarea>
+	<img src="images/app/spacer.png" width="100%" height="43px"/>
+</div>
+
+<!-- menu bar -->
+<div class="floating-menu">
+
+	<!-- Clearing -->
+	<a id="clear" ><img width="30" src="images/app/buttons01.png" /></a>
+	
+	<!-- Opening -->
+	<a id="openFileFake" ><img width="30" src="images/app/buttons02.png" /></a>
+	
+	<!-- Saving -->
+	<a id="save" download="Untitled.txt" ><img width="30" src="images/app/buttons03.png" /></a>
+	
+	<!-- Spacer -->
+	<img src="images/app/spacer.png" width="50" />
+	
+	<!-- Printing -->
+	<a id="printButton" ><img width="30" src="images/app/buttons04.png" /></a>
+	
+	<!-- Local Save -->
+	<img id="lastSaved" width="30" src="images/app/buttons05.png" />
+	
+	<!-- Settings -->
+	<a id="settingsBar" ><img width="30" src="images/app/buttons06.png" /></a>
+	
+	<!-- Reseting the upload -->
+	<form id="resetFileInput" >
+		<input type="file" id="openFileReal" style="display: none" />
+	</form>
+	
+</div>
+
+<div class="arrow">
+	<a id="arrow-button"><img id="arrowButtonTransition" class="arrowButton0" width="50" src="images/app/buttons07.png" /></a>
+</div>
+
+<!-- wordcount -->
+<div class="wordcount">
+	<output id="wordCount"></output>
+</div>
+
+<!-- error output -->
+<div id="outBox" class="output" style="display: none">
+The file you selected is too big to import. Are you sure it's a plain text file?
+</div>
+
+<!-- all settings in here -->
+<div id="settings">
+	<!-- Change Text box width to a percentage -->
+	<div id="percentageCheck">
+		<div class="widthselect-fluid"><input id="percentageFluid" type="radio" name="percentage" /></div>
+		<div class="widthselect-static"><input id="percentageStatic" type="radio" name="percentage" /></div>
+	</div>
+				
+	<!-- Change File Format -->
+	<form id="fileFormatSelect">
+		<div class="formatselect-txt"><input id="txt" type="radio" name="format" value=".txt" /></div>
+		<div class="formatselect-md"><input id="md" type="radio" name="format" value=".md" /></div>
+	</form>
+	
+	<!-- Night Mode -->
+	<div id="nightMode">
+		<div class="night-on"><input id="nightModeOn" type="radio" name="nightMode" /></div>
+		<div class="night-off"><input id="nightModeOff" type="radio" name="nightMode" /></div>
+	</div>
+
+	<!-- Change Font -->
+	<div class="fontselect">
+		<select id="fontSelector">
+			<option id="Inconsolata" value="'Consolas', 'Inconsolata'">Monospace</option>
+			<option id="DroidSans" value="DroidSans">Sans</option>
+			<option id="DroidSerif" value="DroidSerif">Serif</option>
+			<option id="Verdana" value="Verdana">Verdana</option>
+	    </select>
+	</div>
+				
+	<!-- Reset ALL -->
+	<div class="settingsreset" id="reset">
+		<a id="resetSettings"><img src="images/app/spacer.png" width="271px" height="35px"/></a>
+	</div>
+	
+	<!-- Close the settings button -->
+	<div class="settingsclose" id="close">
+		<a id="closeSettings"><img src="images/app/spacer.png" width="866px" height="60px"/></a>
+	</div>
+
+</div>
+
+<!-- External Scripts here -->
+<script type="text/javascript" src="includes/main.js"></script>
+
+</body>
+</html>
