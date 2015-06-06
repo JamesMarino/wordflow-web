@@ -1,6 +1,6 @@
 {
 	"name": "WordFlow",
-	"version": "2.5",
+	"version": "3.0",
 	"manifest_version": 2,
 	"description": "The perfect distraction-free text-editor. Tell your stories.",
   
@@ -11,15 +11,17 @@
 	},
   
 	"app": {
-		"launch": {
-			"local_path": "index.html"
-		}
+
+        "background": {
+          "scripts": ["includes/background.js"]
+        }
+
 	},
   
 	"offline_enabled": true,
   
 	"permissions": [
-		"unlimitedStorage"
+		"storage"
 	],
 	
 	"minimum_chrome_version": "19.0"
