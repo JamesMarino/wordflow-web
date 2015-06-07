@@ -113,7 +113,6 @@ chrome.storage.sync.get(function(remoteData) {
         percentageStatic.checked = true;
 
         // night mode reset
-        $('html').css('box-shadow', 'inset 0px 0px 60px 5px #DDD');
         $('html').css('background-color', '');
         $('#text').css('color', '#424242');
         nightModeOff.checked = true;
@@ -133,18 +132,15 @@ chrome.storage.sync.get(function(remoteData) {
     // ------------- NIGHT MODE -----------------
 
     if (storedNightMode == "on") {
-        $('html').css('box-shadow', 'inset 0px 0px 60px 5px #000');
-        $('html').css('background-color', '#161616');
+        $('html').css('background-color', '#2A2A2A');
         $('#text').css('color', '#DFDFDF');
         nightModeOn.checked = true;
     } else if (storedNightMode == "off") {
-        $('html').css('box-shadow', 'inset 0px 0px 60px 5px #DDD');
         $('html').css('background-color', '');
         $('#text').css('color', '#424242');
         nightModeOff.checked = true;
     // else, fall back to off
     } else {
-        $('html').css('box-shadow', 'inset 0px 0px 60px 5px #DDD');
         $('html').css('background-color', '');
         $('#text').css('color', '#424242');
         nightModeOff.checked = true;
@@ -154,12 +150,10 @@ chrome.storage.sync.get(function(remoteData) {
 
         // when user changes the button, update local storage
         if (nightModeOn.checked) {
-            $('html').css('box-shadow', 'inset 0px 0px 60px 5px #000');
-            $('html').css('background-color', '#161616');
+            $('html').css('background-color', '#2A2A2A');
             $('#text').css('color', '#DFDFDF');
             storeValue({"nightMode": "on"});
         } else if (nightModeOff.checked) {
-            $('html').css('box-shadow', 'inset 0px 0px 60px 5px #DDD');
             $('html').css('background-color', '');
             $('#text').css('color', '#424242');
             storeValue({"nightMode": "off"});
@@ -257,7 +251,7 @@ chrome.storage.sync.get(function(remoteData) {
     // find window height then take away bottom, apply to textarea
     function findTextareaHeight () {
         // the bottom bit in px
-        var bottom = 135;
+        var bottom = 80;
         // this minuses the bottom bit from the full window to give textarea height
         var textareaHeight = $(window).height() - bottom;
 
