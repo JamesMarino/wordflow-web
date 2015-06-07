@@ -6,19 +6,24 @@
 }
 
 @font-face {
+  font-family: 'DroidSerif';
+  font-style: normal;
+  src: local('DroidSerif'), url(resources/DroidSerif.ttf) format('truetype');
+}
+
+@font-face {
   font-family: 'DroidSans';
   font-style: normal;
   src: local('DroidSans'), url(resources/DroidSans.ttf) format('truetype');
 }
 
 @font-face {
-  font-family: 'DroidSerif';
+  font-family: 'Cousine';
   font-style: normal;
-  src: local('DroidSerif'), url(resources/DroidSerif.ttf) format('truetype');
+  src: local('Cousine'), url(resources/Cousine.ttf) format('truetype');
 }
 
 html {
-    box-shadow: inset 0px 0px 60px 5px #ddd;
     overflow-x: hidden;
     overflow-y: hidden;
 }
@@ -77,7 +82,6 @@ div.wordcount {
 div.output {
 	padding: 15px;
     background: #424242;
-    box-shadow: inset 0px 0px 30px 5px #000;
     color: #fff;
     font-family: consolas;
     height: 55px;
@@ -117,7 +121,7 @@ textarea {
     outline: none;
     padding-right: 20px;
     padding-left: 20px;
-    padding-top: 70px;
+    padding-top: 30px;
     resize: none;
     width: 800px;
     overflow-x: hidden;
@@ -262,7 +266,20 @@ div.night-off {
 
 ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
-	background: rgba(184, 184, 184, 0.69);
+	background: rgba(184, 184, 184, 0.38);
     border-radius: 10px;
     margin: 50px;
+}
+@media screen and (max-width: 1050px) {
+textarea {
+	font-size: 20px;
+	line-height: 30px;
+}
+}
+
+@media screen and (max-width: 850px) {
+textarea {
+	font-size: 17px;
+	line-height: 25px;
+}
 }
