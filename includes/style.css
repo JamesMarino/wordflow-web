@@ -6,15 +6,21 @@
 }
 
 @font-face {
+  font-family: 'DroidSerif';
+  font-style: normal;
+  src: local('DroidSerif'), url(resources/DroidSerif.ttf) format('truetype');
+}
+
+@font-face {
   font-family: 'DroidSans';
   font-style: normal;
   src: local('DroidSans'), url(resources/DroidSans.ttf) format('truetype');
 }
 
 @font-face {
-  font-family: 'DroidSerif';
+  font-family: 'Cousine';
   font-style: normal;
-  src: local('DroidSerif'), url(resources/DroidSerif.ttf) format('truetype');
+  src: local('Cousine'), url(resources/Cousine.ttf) format('truetype');
 }
 
 html {
@@ -264,16 +270,16 @@ div.night-off {
     border-radius: 10px;
     margin: 50px;
 }
-@media screen and (max-width: 965px) {
+@media screen and (max-width: 1050px) {
 textarea {
-  font-size: 17px;
-  line-height: 25px;
+	font-size: 20px;
+	line-height: 30px;
 }
 }
 
-@media screen and (max-height: 430px) {
+@media screen and (max-width: 850px) {
 textarea {
-  font-size: 17px;
-  line-height: 25px;
+	font-size: 17px;
+	line-height: 25px;
 }
 }
