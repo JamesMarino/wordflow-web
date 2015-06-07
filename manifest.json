@@ -13,7 +13,8 @@
 	"app": {
 
         "background": {
-          "scripts": ["includes/background.js"]
+          "scripts": [
+            "includes/background.js"]
         }
 
 	},
