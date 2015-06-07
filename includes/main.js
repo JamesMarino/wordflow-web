@@ -1,4 +1,4 @@
-// (c) Copyright 2013 GRAVVITY
+// (c) Copyright 2015 GRAVVITY
 //  __      __                   __      ____    ___
 // /\ \  __/\ \                 /\ \    /\  _`\ /\_ \
 // \ \ \/\ \ \ \    ___   _ __  \_\ \   \ \ \L\_\//\ \     ___   __  __  __
@@ -7,15 +7,11 @@
 //    \ `\___x___/\ \____/\ \_\\ \___,_\   \ \_\   /\____\ \____/\ \___x___/'
 //    '\/__//__/  \/___/  \/_/ \/__,_ /    \/_/   \/____/\/___/  \/__//__/
 
-// http://www.network-science.de/ascii/ larry 3d
-
 
 /*
  * Load Data From Cloud
  */
 chrome.storage.sync.get(function(remoteData) {
-
-    console.log(remoteData);
 
     /*
      * Global Variables
@@ -261,7 +257,7 @@ chrome.storage.sync.get(function(remoteData) {
     // find window height then take away bottom, apply to textarea
     function findTextareaHeight () {
         // the bottom bit in px
-        var bottom = 140;
+        var bottom = 135;
         // this minuses the bottom bit from the full window to give textarea height
         var textareaHeight = $(window).height() - bottom;
 
@@ -287,23 +283,20 @@ chrome.storage.sync.get(function(remoteData) {
 
     // on click button
     document.getElementById('printButton').onclick = function () {
-        var w1 = screen.width - 50;
-        var h1 = screen.height - 100;
-        printer = window.open('','',"width=" + w1 + ",height=" + h1);
-        printer.document.open();
-        // set up document
-        printer.document.write('<!DOCTYPE html><html><head><title></title>');
-        // add style
-        printer.document.write("<style type='text/css'>@page{margin:80px}body{border:none;display:block;font-family:'Arial';font-size:15px;overflow:visible;white-space:pre-wrap}</style>");
-        // finish style
-        printer.document.write('</head><body>');
-        // add new lines
-        printer.document.write(text.value.replace(/\n/gi,'<br>'));
-        printer.document.write('</body></html>');
-        // print
-        printer.print();
-        printer.document.close();
-        printer.close();
+
+        /*
+         * Update Background Script Variable
+         */
+        chrome.runtime.getBackgroundPage(function(background) {
+            background.printedText = text.value;
+        });
+
+        chrome.app.window.create("includes/print.html", {
+            'bounds': {
+                'width': 550,
+                'height': 720
+            }
+        });
     };
 
     // ****************************************
@@ -606,24 +599,18 @@ chrome.storage.sync.get(function(remoteData) {
 
     // warn the user 50 times
     function clear () {
-        var contin = confirm("This will delete the currently open document. Please make sure you've saved your work manually.");
-        if (contin) {
-            var contin1 = confirm("Are you sure you want to delete your work? It'll be gone forever if you haven't saved it manually!");
-            if (contin1) {
-                // fix up text
-                var text = document.getElementById('text');
-                text.value = null;
-                storeValue({"textValue": ""});
-                // fix up wordcount
-                countNumber.innerHTML = "0";
-                // fix up last saved with no time
-                var timeStamp = "Save to Computer";
-                storeValue({"timeStamp": timeStamp});
-                $('#save').qtip('option', 'content.text', timeStamp);
-                // focus on textarea
-                text.focus();
-            }
-        }
+        // fix up text
+        var text = document.getElementById('text');
+        text.value = null;
+        storeValue({"textValue": ""});
+        // fix up wordcount
+        countNumber.innerHTML = "0";
+        // fix up last saved with no time
+        var timeStamp = "Save to Computer";
+        storeValue({"timeStamp": timeStamp});
+        $('#save').qtip('option', 'content.text', timeStamp);
+        // focus on textarea
+        text.focus();
     }
 
     // *********************************
@@ -645,8 +632,7 @@ chrome.storage.sync.get(function(remoteData) {
 
     setInterval(function () {
         storeValue({"textValue": text.value});
-        console.log("written word to server");
-    }, 500);
+    }, 3000);
 
     // *************************
     //  Start SAVE File Segment
@@ -700,17 +686,12 @@ chrome.storage.sync.get(function(remoteData) {
             // then open without asking
             openFileReal.click();
         } else {
-            // ask first then open
-            var contin = confirm("All currently open work will be lost forever if you import. Please make sure you've saved your work manually before continuing.");
-            // if the user pressed ok, carry out
-            if (contin == true) {
-                // fix up last saved with no time
-                storeValue({"timeStamp": timeStamp});
-                $('#save').qtip('option', 'content.text', timeStamp);
+            // fix up last saved with no time
+            storeValue({"timeStamp": timeStamp});
+            $('#save').qtip('option', 'content.text', timeStamp);
 
-                // programatically clicks the real "select file" button
-                openFileReal.click();
-            }
+            // programatically clicks the real "select file" button
+            openFileReal.click();
         }
     };
 
