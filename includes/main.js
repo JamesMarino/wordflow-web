@@ -396,7 +396,7 @@ chrome.storage.sync.get(function(remoteData) {
     // Lightning bolt "popup"
     $('#lastSaved').qtip({
         content: {
-            text: "Auto-Saved to the Cloud"
+            text: "Synced with Chrome"
         },
 
         position: {
