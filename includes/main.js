@@ -15,6 +15,8 @@
  */
 chrome.storage.sync.get(function(remoteData) {
 
+    console.log(remoteData);
+
     /*
      * Global Variables
      */
@@ -323,7 +325,25 @@ chrome.storage.sync.get(function(remoteData) {
     };
 
     // Get Wordcount on Load
-    document.getElementById('wordCount').innerHTML = remoteData["textValue"].match(/\w+/g).length;
+    document.getElementById('wordCount').innerHTML = wordcountOnLoad();
+
+    function wordcountOnLoad ()
+    {
+
+        if (typeof remoteData["textValue"] != 'undefined') {
+            if (remoteData["textValue"] != null) {
+                if (remoteData["textValue"] != "") {
+                    return remoteData["textValue"].match(/\w+/g).length;
+                } else {
+                    return "0";
+                }
+            } else {
+                return "0";
+            }
+        } else {
+            return "0";
+        }
+    }
 
 
     // ****************************************
@@ -389,7 +409,7 @@ chrome.storage.sync.get(function(remoteData) {
     // Lightning bolt "popup"
     $('#lastSaved').qtip({
         content: {
-            text: "Auto-Saved to Chrome"
+            text: "Auto-Saved to the Cloud"
         },
 
         position: {
@@ -439,7 +459,8 @@ chrome.storage.sync.get(function(remoteData) {
     // allows to tell the user what export button is when val NULL (sucha s 1st load)
     function checkForPreviousExportion () {
 
-        if (remoteData["timeStamp"] == null) {
+        if ((typeof remoteData["timeStamp"] == 'undefined') ||
+            (remoteData["timeStamp" === null])) {
             return "Save to Computer";
         } else {
             return remoteData["timeStamp"];
@@ -583,7 +604,7 @@ chrome.storage.sync.get(function(remoteData) {
         clear();
     };
 
-// warn the user 50 times
+    // warn the user 50 times
     function clear () {
         var contin = confirm("This will delete the currently open document. Please make sure you've saved your work manually.");
         if (contin) {
@@ -614,15 +635,18 @@ chrome.storage.sync.get(function(remoteData) {
 
     // on refresh and page reopen - there will be no value, so shove it in
     if (!text.value) {
-        text.value = remoteData['textValue'];
+        if ((typeof remoteData['textValue'] != 'undefined') ||
+            (remoteData['textValue'] != null)) {
+            text.value = remoteData['textValue'];
+        } else {
+            text.value = "";
+        }
     }
 
-    // on key up attempt to save to localStorage
-    text.addEventListener('keyup', function() {
-        // set localStorage with the value just selected
-        storeValue({"textValue": this.value});
-    }, false);
-
+    setInterval(function () {
+        storeValue({"textValue": text.value});
+        console.log("written word to server");
+    }, 500);
 
     // *************************
     //  Start SAVE File Segment
