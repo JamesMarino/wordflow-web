@@ -11,7 +11,7 @@
 /*
  * Load Data From Cloud
  */
-chrome.storage.sync.get(function(remoteData) {
+chrome.storage.local.get(function(remoteData) {
 
     /*
      * Global Variables
@@ -624,9 +624,10 @@ chrome.storage.sync.get(function(remoteData) {
         }
     }
 
-    setInterval(function () {
+    // Save to local storage
+    text.onkeydown = function () {
         storeValue({"textValue": text.value});
-    }, 3000);
+    };
 
     // *************************
     //  Start SAVE File Segment
@@ -750,7 +751,7 @@ chrome.storage.sync.get(function(remoteData) {
      */
     function storeValue(object)
     {
-        chrome.storage.sync.set(object);
+        chrome.storage.local.set(object);
     }
 
 });

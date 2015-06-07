@@ -1,6 +1,6 @@
 {
 	"name": "Wordflow",
-	"version": "3.0",
+	"version": "3.1",
 	"manifest_version": 2,
 	"description": "The perfect distraction-free text-editor. Tell your stories.",
   
@@ -22,7 +22,8 @@
 	"offline_enabled": true,
   
 	"permissions": [
-		"storage"
+		"storage",
+        "unlimitedStorage"
 	],
 	
 	"minimum_chrome_version": "23.0"
